@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>Coarch DSN V2</title>
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1 style="text-transform: none;">Coap DSN / NEO</h1>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Plan
+						- Use Cases DSN <!-- .element: class="fragment" -->
+						- Principes d'architecture <!-- .element: class="fragment" -->
+						- Contraintes et Exigences <!-- .element: class="fragment" -->
+						- Architecture actuelle <!-- .element: class="fragment" -->
+						- Scénarii <!-- .element: class="fragment" -->
+						- Préconisations d'architecture <!-- .element: class="fragment" -->
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Use Cases DSN
+						- Fiabilisation informations individus <!-- .element: class="fragment" data-fragment-index="1" -->
+						- Gestions des évenements Salariés / Prest / Cot <!-- .element: class="fragment" data-fragment-index="2" -->
+						- TdB Absentéisme <!-- .element: class="fragment" data-fragment-index="3" -->
+						- Re-Tarification <!-- .element: class="fragment" data-fragment-index="4" -->
+						- et bien d'autre à venir <!-- .element: class="fragment" data-fragment-index="5" -->
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Principes d'architecture ...
+						- PMD02: Point de vérité unique pour toutes les données de référence
+						- PMD05: Les données métiers sont accessibles via des services d'accès
+						- PME01: Tout échange de données est associé à un format d'échange décliné du modèle métier MM
+						- PME03: Chaque application du SI répond à des fonctions métier explicitées
+						- PRM01: Les règles métier sont centralisées
+						- PRM02: Capitaliser sur les processus implémentés dans les progiciels lorsqu'ils existent
+					</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### ... et d'urbanisation applicables
+						- Cohérence : Chaque application a un rôle clair vis-à-vis des autres applications
+						- Modularité
+						- Réutilisation
+						- Interopérabilité
+						- Proposer des données de qualité - Intégrité
+					</script>
+				</section>
+				<section>
+					<h3 style="text-transform: none;">Contraintes et Exigences</h3>
+				</section>
+				<section>
+					<h3 style="text-transform: none;">Architecture actuelle</h3>
+					<img style="height: 580px; float: left; border: none; margin-left: 150px;" src="img/Existant_Coap_1.drw.svg" alt="Existant" />
+				</section>
+				<section>
+					<section>
+						<h3 style="text-transform: none;">Scénario 1</h3>
+						<img style="height: 580px; float: left; border: none; margin-left: 150px;" src="img/Scenari_Coap_1.drw.svg" alt="Scenario 1" />
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+						### Scénario 1
+						- Architecture ouverte <!-- .element: class="fragment" -->
+						- Traitement DSN possédés par MM <!-- .element: class="fragment" -->
+						- Adopte GT-AIA <!-- .element: class="fragment" -->
+						- Fiabilisation des données "au plus tôt" <!-- .element: class="fragment" -->
+						- Ouvert au traitement de la gestion déleguée <!-- .element: class="fragment" -->
+						- Ouvert au traitement des DSN Copies <!-- .element: class="fragment" -->
+						- Rationnalise/Mutualise les traitements DSN ... <!-- .element: class="fragment" -->
+						- ... et alloue les traitements métiers à qui de droit <!-- .element: class="fragment" -->
+						- Ouvert au re-use <!-- .element: class="fragment" -->
+						- Prend en compte l'ensemble des UC <!-- .element: class="fragment" -->
+						- Architecture "Integration Ready" pour les nouveaux UC <!-- .element: class="fragment" -->
+						</script>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3 style="text-transform: none;">Scénario 2</h3>
+						<img style="height: 580px; float: left; border: none; margin-left: 150px;" src="img/Scenari_Coap_2.drw.svg" alt="Scenario 2" />
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+						### Scénario 2
+						- Architecture néo-centrique <!-- .element: class="fragment" -->
+						- Traitements DSN possédés par DXC <!-- .element: class="fragment" -->
+						- Adapte GT-AIA <!-- .element: class="fragment" -->
+						- Traite 98 % des flux DSN ... <!-- .element: class="fragment" -->
+						- ... pour 25 % des UC actuel (périmètre fonctionnel Prest/Cotisation) ... <!-- .element: class="fragment" -->
+						- ... et sans garantie de consolidation des affilitations (apicil) <!-- .element: class="fragment" -->
+						- Adaptation nécessaire pour l'intégration de nouveaux UC <!-- .element: class="fragment" -->
+						</script>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3 style="text-transform: none;">Scénario 3</h3>
+						<img style="height: 580px; float: left; border: none; margin-left: 150px;" src="img/Scenari_Coap_3.drw.svg" alt="Scenario 3" />
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+						### Scénario 3
+						- Chaque consommateur intègre la DSN comme il le souhaite <!-- .element: class="fragment" -->
+						- Aucune mutualisation des traitements <!-- .element: class="fragment" -->
+						- Duplication des traitements et augmentations des couts de maintenance <!-- .element: class="fragment" -->
+						- Perte de cohérence <!-- .element: class="fragment" -->
+						- Couplage faible (inexistant) <!-- .element: class="fragment" -->
+						</script>
+					</section>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+					### Bilan
+					Principe | Scénario 1 | Scénario 2 | Scénario 3
+					----- | ----- | ----- | -----
+					PMD02 | OK | OK | KO
+					PMD05 | OK | KO | KO
+					PME01 | OK | KO | KO
+					PME03 | OK | KO | KO
+					PRM01 | OK | KO | KO
+					PRM02 | OK | KO | KO
+					</script>
+				</section>
+				<section>
+					<h3 style="text-transform: none;">Préconisations d'architecture</h3>
+					Scénario 1
+				</section>
+			</div>
+		</div>
+		<script src="reveal.js/lib/js/head.min.js"></script>
+		<script src="reveal.js/js/reveal.js"></script>
+		<script>
+			Reveal.initialize({
+
+
+				// The "normal" size of the presentation, aspect ratio will be preserved
+				// when the presentation is scaled to fit different resolutions. Can be
+				// specified using percentage units.
+				width: 960,
+				height: 700,
+
+				// Factor of the display size that should remain empty around the content
+				margin: 0.1,
+
+				// Bounds for smallest/largest possible scale to apply to content
+				minScale: 0.2,
+				maxScale: 1.5,
+				
+				// width: "100%",
+				// height: "100%",
+				// margin: 0,
+				// minScale: 1,
+				// maxScale: 1,
+
+				dependencies: [
+					// Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+					// Interpret Markdown in <section> elements
+					{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+					// Syntax highlight for <code> elements
+					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+					// Zoom in and out with Alt+click
+					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+
+					// Speaker notes
+					{ src: 'reveal.js/plugin/notes/notes.js', async: true },
+
+					// MathJax
+					{ src: 'reveal.js/plugin/math/math.js', async: true },
+					{ src: 'reveal.js-plugins/menu/menu.js' }
+				]
+			});
+		</script>
+	</body>
+</html>
